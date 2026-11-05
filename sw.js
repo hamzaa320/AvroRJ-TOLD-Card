@@ -1,5 +1,5 @@
 ﻿/* RJ Load Sheet — Service Worker (cache-first, full offline after 1st visit) */
-var CACHE = "rjload-v14";
+var CACHE = "rjload-v15";
 var ASSETS = [
   "./",
   "./index.html",
@@ -15,7 +15,8 @@ var ASSETS = [
   "./icon-192.png",
   "./icon-512.png",
   "./apple-touch-icon.png",
-  "./logo.png"
+  "./logo.png",
+  "./setup.html"
 ];
 
 self.addEventListener("install", function (e) {

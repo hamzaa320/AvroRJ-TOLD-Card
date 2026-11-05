@@ -49,6 +49,31 @@
   }
   function isConfigured() { var c = readCfg(); return !!c.url; }
 
+  /* ---------- one-time setup link: ?cfg=<base64(json)> ----------
+     Admin opens e.g.  https://…/?cfg=BASE64  once per device; we persist
+     it and strip the credentials from the address bar. No secrets live in
+     the repository — they travel only inside the private link. */
+  (function applySetupParam() {
+    try {
+      var m = /[?&]cfg=([^&]+)/.exec(window.location.search);
+      if (!m) return;
+      var raw = decodeURIComponent(m[1]);
+      var json = decodeURIComponent(escape(atob(raw)));
+      var c = JSON.parse(json);
+      if (c && c.url && /^https:\/\/script\.google\.com\//.test(c.url)) {
+        saveCfg(c.url, c.token || "");
+        Log.info("Drive config applied from setup link");
+      } else {
+        Log.warn("Setup link ignored: invalid hook URL");
+      }
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, "", window.location.pathname + window.location.hash);
+      }
+    } catch (e) {
+      Log.warn("Setup link ignored: " + (e && e.message ? e.message : e));
+    }
+  })();
+
   /* ---------- base64 ---------- */
   function bytesToBase64(buf) {
     var bytes = new Uint8Array(buf);

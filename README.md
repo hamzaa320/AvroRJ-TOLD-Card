@@ -1,4 +1,4 @@
-﻿# AVRO RJ — Load Sheet & Performance (PWA)
+﻿# AvroRJ TOLD Card — Load Sheet & Performance (PWA)
 
 تطبيق ويب (PWA) لحساب **بيانات الإقلاع والهبوط** لطائرة AVRO RJ، مبني على شكل
 نموذج AIR LIBYA الورقي، ويعمل **بالكامل دون إنترنت** بعد أول فتح
@@ -37,7 +37,10 @@ Flight# = TLR+أرقام · ATOM (Tonnes) · V1/VR/V2/VFTO من جداول ال�
 كل الأجهزة ترفع ملف الـ PDF إلى **مجلد واحد** عندك في Drive عبر **Google Apps Script** (لا خادم، لا OAuth، لا حسابات على الـ iPads):
 
 1. **التفاصيل خطوة بخطوة في ملف `GOOGLE_DRIVE_SETUP.md`** (انسخ `GoogleDrive_Hook.gs` إلى Apps Script، انشره كـ Web App، خذ الرابط).
-2. في كل iPad: **اضغط على الشعار مطوّلاً لفتح Cloud storage** → الصق **رابط `/exec`** و**الرمز السري (TOKEN)** → **Save** (أو **Test**).
+2. **أنشئ «رابط الإعداد» مرة واحدة لكل الأجهزة:**
+   - على أي جهاز/كمبيوتر افتح **https://hamzaa320.github.io/AvroRJ-TOLD-Card/setup.html**
+   - الصق رابط `/exec` والرمز السري (TOKEN) ← **إنشاء رابط الإعداد** ← **نسخ**.
+   - افتح الرابط على كل iPad مرة واحدة (رسالة/AirDrop/QR) — يُحفظ الإعداد تلقائياً ويُمسح الرمز من شريط العنوان.
 3. عند الضغط على **⎙ Save PDF**: يُنزَّل محلياً ثم يُرفع تلقائياً إلى:
    `RJ Load Sheets/<رقم الرحلة>/TLR<flight>_<date>.pdf`
 

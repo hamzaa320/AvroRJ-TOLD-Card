@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1428">
+<title>AvroRJ TOLD Card — إعداد الرفع</title>
+<style>
+:root{
+  --bg:#0d1626; --panel:#121d31; --panel2:#182740;
+  --line:#2a3d5c; --ink:#e9f0fa; --muted:#93a7c4; --accent:#5aa2f8; --ok:#43d17f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  min-height:100vh;padding:22px 18px 40px;
+}
+.wrap{max-width:560px;margin:0 auto}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.35);
+}
+h1{font-size:22px;margin-bottom:2px}
+p.sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+input{
+  width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+  color:var(--ink);padding:12px;font-size:15px;font-family:monospace;
+}
+button{
+  margin-top:14px;width:100%;background:var(--accent);color:#fff;border:0;
+  border-radius:10px;padding:13px;font-size:16px;font-weight:800;cursor:pointer;
+}
+.out{margin-top:16px}
+.out label{margin-top:0}
+.hint{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+.ok{color:var(--ok)}
+.copy-row{display:flex;gap:8px}
+.copy-row input{flex:1}
+.copy-row button{width:auto;margin-top:0;padding:12px 16px;font-size:14px}
+ol.steps{margin:8px 24px 4px;color:var(--ink);font-size:14px;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>إعداد الرفع إلى Google Drive</h1>
+    <p class="sub">هذه الصفحة تُولّد «رابط إعداد لمرة واحدة» — لا ترسل أي بيانات لأحد؛ كل شيء يعمل على هذا الجهاز فقط.</p>
+
+    <label for="hook">رابط Web App (ينتهي بـ /exec)</label>
+    <input id="hook" type="url" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec">
+
+    <label for="token">الرمز السري (TOKEN) — نفس ما في <code>GoogleDrive_Hook.gs</code></label>
+    <input id="token" type="text" spellcheck="false" placeholder="TEST-123 (مثال)">
+
+    <button id="gen" type="button">إنشاء رابط الإعداد</button>
+
+    <div class="out" id="out" hidden>
+      <label for="link">رابط الإعداد (افتحه على كل جهاز مرة واحدة)</label>
+      <div class="copy-row">
+        <input id="link" readonly>
+        <button id="copy" type="button">نسخ</button>
+      </div>
+      <p class="hint ok" id="copied" hidden>تم النسخ ✓</p>
+      <ol class="steps">
+        <li>انسخ الرابط (زر «نسخ»).</li>
+        <li>أرسله لكل جهاز (رسالة/AirDrop/QR).</li>
+        <li>على كل جهاز: افتح الرابط <b>مرة واحدة</b> — يُحفظ الإعداد ويُحذف الرمز من شريط العنوان تلقائياً.</li>
+        <li>للمستخدم العادي لا تظهر أي إعدادات — والرفع يعمل تلقائياً.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var ORIGIN = window.location.origin + window.location.pathname.replace(/setup\.html.*$/, "");
+
+  function buildLink() {
+    var hook = $("hook").value.trim();
+    var token = $("token").value.trim();
+    if (!/^https:\/\/script\.google\.com\/.*\/exec\/?$/.test(hook)) {
+      alert("رابط Web App غير صحيح — يجب أن يبدأ بـ https://script.google.com/ وينتهي بـ /exec");
+      return;
+    }
+    if (!token) { alert("أدخل الرمز السري (TOKEN)"); return; }
+    var payload = JSON.stringify({ url: hook, token: token });
+    var b64 = btoa(unescape(encodeURIComponent(payload)));
+    $("link").value = ORIGIN + "?cfg=" + encodeURIComponent(b64);
+    $("out").hidden = false;
+    $("copied").hidden = true;
+  }
+
+  $("gen").addEventListener("click", buildLink);
+  $("copy").addEventListener("click", function () {
+    var el = $("link");
+    el.select(); el.setSelectionRange(0, el.value.length);
+    var done = function () { $("copied").hidden = false; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(el.value).then(done, done);
+    } else {
+      try { document.execCommand("copy"); done(); } catch (e) { /* ignore */ }
+    }
+  });
+})();
+</script>
+</body>
+</html>
