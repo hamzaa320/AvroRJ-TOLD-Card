@@ -1,5 +1,5 @@
 ﻿/* RJ Load Sheet — Service Worker (cache-first, full offline after 1st visit) */
-var CACHE = "rjload-v12";
+var CACHE = "rjload-v13";
 var ASSETS = [
   "./",
   "./index.html",
