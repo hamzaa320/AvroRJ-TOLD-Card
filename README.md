@@ -1,4 +1,4 @@
-# AVRO RJ — Load Sheet & Performance (PWA)
+﻿# AVRO RJ — Load Sheet & Performance (PWA)
 
 تطبيق ويب (PWA) لحساب **بيانات الإقلاع والهبوط** لطائرة AVRO RJ، مبني على شكل
 نموذج AIR LIBYA الورقي، ويعمل **بالكامل دون إنترنت** بعد أول فتح
@@ -26,7 +26,7 @@ Flight# = TLR+أرقام · ATOM (Tonnes) · V1/VR/V2/VFTO من جداول ال�
 حاسبة **EPL/Payload** · **⎙ Save PDF** (الواجهة 2 فقط) · **Clear** (الواجهة 1 فقط) · **نسخ الملخص**.
 
 ## الموقع المباشر (GitHub Pages)
-**https://hamzaa320.github.io/RJ100-Loadsheet/**
+**https://hamzaa320.github.io/AvroRJ-TOLD-Card/**
 - يعمل على أي هاتف/تابلت (خاصةً iPhone/iPad) عبر **Safari** — افتح الرابط ← **مشاركة ← إضافة إلى الشاشة الرئيسية**؛ يصبح تطبيقاً مستقلاً يعمل **بدون إنترنت**.
 - على iOS زر `Save PDF` يفتح الـ PDF في عارض ملفات؛ من هناك **مشاركة ← حفظ إلى الملفات**.
 

@@ -46,7 +46,7 @@
 | `rjload-pdf.js` | مولّد PDF (يركّب قيم الحقول فوق القالب `told_final` بإحداثيات مقاسة) |
 | `rjload-drive.js` | رفع PDF إلى **Google Drive عبر Web App (Apps Script)** — مجلد مركزي، بلا OAuth |
 | `GOOGLE_DRIVE_SETUP.md` | خطوات نشر الـ hook (مرة واحدة) |
-| (الموقع) `https://hamzaa320.github.io/RJ100-Loadsheet/` | **GitHub Pages مباشر** — نفس فكرة مستودع `RJ100` (فرع `main` من الجذر)، يعمل على iOS |
+| (الموقع) `https://hamzaa320.github.io/AvroRJ-TOLD-Card/` | **GitHub Pages مباشر** — نفس فكرة مستودع `RJ100` (فرع `main` من الجذر)، يعمل على iOS |
 | `GoogleDrive_Hook.gs` | كود Apps Script الجاهز (doGet/doPost + token + X-اسْتبدال بنفس الاسم) |
 | `rjload-queue.js` | **طابور رفع دون اتصال** (IndexedDB): يحفظ الـ PDF ويرفعه تلقائياً عند عودة الاتصال |
 | `told_final_b64.js` | القالب `told_final.pdf` مُضمَّن base64 (للتصدير دون إنترنت) |
@@ -83,7 +83,7 @@
 - **ملف البيانات `rjload-data.js`**: عدّل المستخدم قيم Elevation/الممرات وأضاف المطار **HLMT** — تقبّل كما هو (لم يُمسّ أي قيمة أخرى).
 
 ## [VERIFICATION] — نتائج التحقق
-- ✅ **النشر المباشر على GitHub Pages (hamzaa320):** `https://hamzaa320.github.io/RJ100-Loadsheet/` — الصفحة تُحمَّل 200، كل الأصول (index/logo/كل السكربتات) 200، **لا Console Errors**، Service Worker **registered + activated** → يعمل على iOS (إضافة للشاشة الرئيسية)، اسم التطبيق `RJ100 Load Sheet`، meta `apple-mobile-web-app-*` مضافة.
+- ✅ **النشر المباشر على GitHub Pages (hamzaa320):** `https://hamzaa320.github.io/AvroRJ-TOLD-Card/` — الصفحة تُحمَّل 200، كل الأصول (index/logo/كل السكربتات) 200، **لا Console Errors**، Service Worker **registered + activated** → يعمل على iOS (إضافة للشاشة الرئيسية)، اسم التطبيق `RJ100 Load Sheet`، meta `apple-mobile-web-app-*` مضافة.
 - ✅ مطابقة كل جداول RJ100 بالكامل مع المصدر (تم إصلاح أخطاء نَسخ سابقة).
 - ✅ التدفق الكامل في المتصفح بلا Console Errors (TOLD1/TOLD2، EPL عبر لوحة الأرقام، صحة الحسابات: EPL 9110، ATOM 41T، V1/VR/V2/VFTO=128/132/139/183).
 - ✅ تصدير PDF: يولَّد `TLR454_2026-11-03.pdf` (75×185mm) ويحتوي قيم الحقول في مواضعها بخط واضح؛ أُعيد التحقق بصرياً للدقّة.
