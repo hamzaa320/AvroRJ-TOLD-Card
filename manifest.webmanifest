@@ -1,6 +1,6 @@
 {
-  "name": "AVRO RJ — Load Sheet",
-  "short_name": "RJ Load Sheet",
+  "name": "AvroRJ TOLD Card",
+  "short_name": "AvroRJ TOLD",
   "description": "Avro RJ take-off & landing data load sheet — offline",
   "start_url": "./",
   "scope": "./",
